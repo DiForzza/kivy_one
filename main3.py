@@ -35,7 +35,7 @@ class CalculatorApp(App):
     def build(self):
         padding = 20
         self.formula='0'
-        bl = BoxLayout(orientation = 'vertical', padding=padding)
+        bl = BoxLayout(orientation='vertical', padding=padding)
         gl = GridLayout(cols=4, spacing=3, size_hint=(1, .8))
         self.lbl = Label(
             text=self.formula,
