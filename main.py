@@ -5,7 +5,8 @@ from kivy.uix.gridlayout import GridLayout
 
 
 class Container(GridLayout):
-    pass
+    def change_text(self):
+        self.label_widget.text = self.chtonibub.text
 
 
 class MyApp(App):
