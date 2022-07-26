@@ -1,0 +1,36 @@
+<Container>:
+    rows: 3
+    padding: 50
+
+    chtonibub: text_input
+    label_widget: label
+
+    TextInput:
+        id: text_input
+        size_hint: 1, 0.4
+
+        multiline: False
+        font_size: 40
+
+    Label:
+        id: label
+        text: 'Some text'
+        font_size: 40
+
+    FloatLayout:
+        Button:
+            size_hint: 0.5, 0.4
+            pos_hint: {'center_x': 0.2, 'center_y': 0.1}
+            text: 'On Release'
+            font_size: 40
+
+            on_release:
+                self.text = 'Hello'
+        Button:
+            size_hint: 0.5, 0.4
+            pos_hint: {'center_x': 0.8, 'center_y': 0.1}
+            text: 'On press'
+            font_size: 40
+
+            on_press:
+                root.change_text()

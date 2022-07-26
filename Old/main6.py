@@ -35,7 +35,7 @@ class LoginScreen(MDApp):
 
     manager = ScreenManager()
 
-    file_read = open("main.kv","r").read()
+    file_read = open("main.kv", "r").read()
     hotreload = True
     label =  None
 
