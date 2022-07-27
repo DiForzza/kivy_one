@@ -1,22 +1,27 @@
-# pip install --upgrade --force-reinstall Kivy_examples-2.1.0-py2.py3-none-any.whl
+import kivy
 from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.gridlayout import GridLayout
-from kivy.properties import ObjectProperty
+from kivy.uix.scatter import Scatter
+from kivy.uix.widget import Widget
+from kivy.uix.relativelayout import RelativeLayout
+kivy.require('1.9.0')
 
 
-class Container(GridLayout):
-    text_input = ObjectProperty()
-    label_widget = ObjectProperty()
-
-    def change_text(self):
-        self.label_widget.text = self.text_input.text
+class SquareWidget(Widget):
+    pass
 
 
-class MyApp(App):
+class ScatterWidget(Scatter):
+    pass
+
+
+class Scatter_App(RelativeLayout):
+    pass
+
+
+class ScatterApp(App):
     def build(self):
-        return Container()
+        return Scatter_App()
 
 
 if __name__ == '__main__':
-    MyApp().run()
+    ScatterApp().run()

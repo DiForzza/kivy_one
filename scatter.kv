@@ -1,0 +1,25 @@
+<SquareWidget>:
+    size: 100, 100
+    canvas:
+        Color:
+            rgb: [0.345, 0.85, 0.456]
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<Scatter_App>:
+    canvas:
+        Color:
+            rgb: .8, .5, .4
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+    ScatterWidget:
+        id: square_widget_id
+        SquareWidget:
+
+    Label:
+        text: 'Position: ' + str(square_widget_id.pos)
+        size_hint: .1, .1
+        pos: 500, 300
