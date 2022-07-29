@@ -1,27 +1,24 @@
-import kivy
 from kivy.app import App
-from kivy.uix.scatter import Scatter
+from kivy.uix.boxlayout import BoxLayout
+from kivy.properties import ObjectProperty
 from kivy.uix.widget import Widget
-from kivy.uix.relativelayout import RelativeLayout
-kivy.require('1.9.0')
+from kivy.graphics import Rectangle, Color
 
 
-class SquareWidget(Widget):
+class GUI(BoxLayout):
+    board = ObjectProperty(None)
+
+
+class Board(Widget):
     pass
 
 
-class ScatterWidget(Scatter):
-    pass
-
-
-class Scatter_App(RelativeLayout):
-    pass
-
-
-class ScatterApp(App):
+class TestApp(App):
     def build(self):
-        return Scatter_App()
+        gui = GUI()
+        return gui
 
 
-if __name__ == '__main__':
-    ScatterApp().run()
+if __name__=="__main__":
+    app = TestApp()
+    app.run()
