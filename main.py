@@ -8,11 +8,11 @@ from kivy.properties import ColorProperty
 from kivy.uix.gridlayout import GridLayout
 
 Config.set('graphics', 'resizable', 0)
-Config.set('graphics', 'width', 400)
-Config.set('graphics', 'height', 500)
+Config.set('graphics', 'width', 640)
+Config.set('graphics', 'height', 840)
 
 
-class GUI(GridLayout):
+class GUI(BoxLayout):
     pass
 
 

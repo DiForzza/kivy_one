@@ -1,23 +1,22 @@
+GUI:
 <GUI>:
-    rows: 4
-    TextInput:
-        size_hint: 1, 0.1
-        multiline: False
-        font_size: 40
+    size: root.size
+    pos: root.pos
 
-    BoxLayout:
-
-        Scatter:
-            do_rotation: False
-            Image:
-                pos_hint: {'center_x': 1, 'center_y': 1}
-                source: '123.jpg'
 
     GridLayout:
-        background_normal: ''
-        backgroud_color: (1, 1, 1, 0)
-        cols: 2
-        pos_hint: {'center_x': 1, 'center_y': 0}
+        cols: 5
+        BoxLayout:
+            Scatter:
+                do_rotation: False
+                Image:
+                    pos_hint: {'center_x': 1, 'center_y': 1}
+                    size: 100,164
+                    source: '123.jpg'
+        TextInput:
+            size_hint: 1, 0.2
+            multiline: False
+            font_size: 40
         Button:
             size_hint: None,None
             size: 64,64
@@ -26,3 +25,4 @@
             size_hint: None,None
             size: 64,64
             text: "gi"
+
