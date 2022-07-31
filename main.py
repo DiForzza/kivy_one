@@ -1,26 +1,30 @@
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
-from kivy.properties import ObjectProperty
+from kivy.uix.button import Button
 from kivy.uix.widget import Widget
-from kivy.graphics import Rectangle, Color
-from kivy.config import Config
-from kivy.properties import ColorProperty
-from kivy.uix.gridlayout import GridLayout
-
-Config.set('graphics', 'resizable', 0)
-Config.set('graphics', 'width', 640)
-Config.set('graphics', 'height', 840)
 
 
-class GUI(BoxLayout):
+class BoxLayoutExample(BoxLayout):
+    pass
+"""    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        b1 = Button(text='A')
+        b2 = Button(text='B')
+        b3 = Button(text='C')
+        self.add_widget(b1)
+        self.add_widget(b2)
+        self.add_widget(b3)
+        """
+
+
+class MainWidget(Widget):
     pass
 
 
-class TestApp(App):
-    def build(self):
-        return GUI()
+class TheLabApp(App):
+    pass
 
 
 if __name__ == "__main__":
-    app = TestApp()
+    app = TheLabApp()
     app.run()

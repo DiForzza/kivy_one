@@ -1,4 +1,5 @@
 from kivy.app import App
+from kivy.multistroke import xrange
 from kivy.uix.widget import Widget
 from kivy.graphics import PushMatrix, PopMatrix, Mesh, RenderContext
 from random import random, choice
