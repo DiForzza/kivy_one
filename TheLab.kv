@@ -1,4 +1,28 @@
-GridLayoutExample:
+WidgetsExample:
+
+<WidgetsExample>:
+    cols: 3
+    ToggleButton:
+        text: 'Active/Deactive'
+        on_state: root.on_toggle_button_state(self)
+    Button:
+        text: 'Click here'
+        on_press: root.on_button_click()
+        font_name: 'GOST_B.TTF'
+        font_size: 40
+    Label:
+        text: root.my_text
+        font_name: 'GOST_B.TTF'
+        font_size: '80'
+        color: 1 , 0.5, 1, 1
+
+
+
+<PageLayoutExample@PageLayout>:
+    AnchorLayoutExample:
+    BoxLayoutExample:
+    MainWidget:
+    GridLayoutExample:
 
 <GridLayoutExample@GridLayout>:
     rows: 2
