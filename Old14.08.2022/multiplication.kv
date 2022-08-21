@@ -1,0 +1,31 @@
+MultiplicationTable:
+<MultiplicationTable@GridLayout>:
+    rows: 3
+    Label:
+        size_hint: 1, 0.3
+        text: 'Заработано тугриков: ' + root.text_tugriki
+        font_size: 30
+    Label:
+        text: root.first_primer
+        font_size: '100dp'
+    GridLayout:
+        cols: 3
+        rows: 3
+        Button:
+            text: root.answer1
+            on_press: root.win_or_not(self)
+        Button:
+            text: root.answer2
+            on_press: root.win_or_not(self)
+        Button:
+            text: root.answer3
+            on_press: root.win_or_not(self)
+        Button:
+            text: root.answer4
+            on_press: root.win_or_not(self)
+        Button:
+            text: root.answer5
+            on_press: root.win_or_not(self)
+        Button:
+            text: root.answer6
+            on_press: root.win_or_not(self)

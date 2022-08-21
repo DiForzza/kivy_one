@@ -1,10 +1,43 @@
-WidgetsExample:
+MultiplicationTable:
+<MultiplicationTable@GridLayout>:
+    rows: 3
+    Label:
+        size_hint: 1, 0.3
+        text: root.text_tugriki
+    Label:
+        text: '2'
+        font_size: '100dp'
+    GridLayout:
+        cols: 6
+        Button:
+            text: '1'
+        Button:
+            text: '2'
+        Button:
+            text: '3'
+        Button:
+            text: '4'
+        Button:
+            text: '5'
+        Button:
+            text: '6'
+
+
+<ImagesExample@GridLayout>:
+    cols: 3
+    Image:
+        source: '123.jpg'
+    Image:
+        source: '123.jpg'
+        allow_stretch: True
+    Image:
+        source: '123.jpg'
+        allow_stretch: True
+        keep_ratio: False
 
 <WidgetsExample>:
-    cols: 3
-    toggle_button: toggle_button
+    cols: 4
     ToggleButton:
-        id: toggle_button
         text: 'ENABLE'
         on_state: root.on_toggle_button_state(self)
     Button:
@@ -18,6 +51,33 @@ WidgetsExample:
         font_name: 'GOST_B.TTF'
         font_size: '80'
         color: 1 , 0.5, 1, 1
+    Switch:
+        id: my_switch
+        on_active: root.on_active(self)
+        font_name: 'GOST_B.TTF'
+        font_size: '80'
+    Slider:
+        id: my_slider
+        min: 1
+        max: 100
+        value: 50
+        on_value: root.on_value(self)
+        orientation: 'vertical'
+        disabled: not my_switch.active
+    Label:
+        text: str(int(my_slider.value))
+    ProgressBar:
+        max: 100
+        value: my_slider.value
+    TextInput:
+        id: my_text_input
+        size_hint: 1, 1
+        width: '100dp'
+        text: 'foo'
+        multiline: False
+        on_text_validate: root.on_text_validate(self)
+    Label:
+        text: root.text_validate_str
 
 
 
