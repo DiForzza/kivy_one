@@ -1,11 +1,8 @@
 import random
 from kivymd.app import MDApp
-from kivy.properties import StringProperty, ObjectProperty, get_color_from_hex
-from kivy.uix.anchorlayout import AnchorLayout
+from kivy.properties import ObjectProperty
 from kivy.uix.button import Button
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.label import Label
+
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.label import MDLabel
 
@@ -17,18 +14,19 @@ class MultiApp(MDApp):
     btn4 = ObjectProperty()
     btn5 = ObjectProperty()
     btn6 = ObjectProperty()
-
+    count_different_answers = []
 
     def add_button(self, g2):
-        self.list = [str(self.right_answer),
-                str(random.randint(1, 99)),
-                str(random.randint(1, 99)),
-                str(random.randint(1, 99)),
-                str(random.randint(1, 99)),
-                str(random.randint(1, 99))]
+        self.list = [self.multiplication_answers(),
+                     self.multiplication_answers(),
+                     self.multiplication_answers(),
+                     self.multiplication_answers(),
+                     self.multiplication_answers(),
+                     self.multiplication_answers()]
+        self.list[0] = str(self.right_answer)
         random.shuffle(self.list)
         self.answer = self.list[0]
-        btn1 = (Button(text=self.answer, font_size=40, on_press=self.new_example, padding=5))
+        btn1 = (Button(text=self.answer, font_size=40, on_press=self.new_example))
         g2.add_widget(btn1)
         self.answer = self.list[1]
         btn2 = (Button(text=self.answer, font_size=40, on_press=self.new_example))
@@ -47,6 +45,16 @@ class MultiApp(MDApp):
         g2.add_widget(btn6)
         return g2
 
+    def multiplication_answers(self):
+        list_answers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 25, 27, 28, 30, 32, 35, 36, 40,
+                        42, 45, 48, 49, 54, 56, 63, 64, 72, 81]
+        rand = random.randint(0, 35)
+        self.count_different_answers.append(rand)
+        if len(self.count_different_answers) == 5:
+            self.count_different_answers = []
+        print(self.count_different_answers, len(self.count_different_answers))
+        return str(list_answers[rand])
+
     def new_example(self, button):
         if button.text == self.right_answer:
             self.count = self.count + 1
@@ -62,7 +70,7 @@ class MultiApp(MDApp):
             b = random.randint(4, 9)
         self.right_answer = str(a * b)
         for i in range(0, len(button.parent.children)):
-            button.parent.children[i].text = str(random.randint(1, 9)) + str(random.randint(1, 9))
+            button.parent.children[i].text = self.multiplication_answers()
         button.parent.parent.children[1].text = str(a) + ' * ' + str(b) + ' = '
         rand = random.randint(0, 5)
         button.parent.children[rand].text = str(a * b)
@@ -79,12 +87,10 @@ class MultiApp(MDApp):
         self.a = random.randint(1, 9)
         self.b = random.randint(1, 9)
         self.right_answer = str(self.a * self.b)
-        print(self.right_answer)
         g1.add_widget(MDLabel(text=str(self.a) + ' * ' + str(self.b) + ' = ',
                               halign="center",
                               theme_text_color="Custom",
                               text_color=[1, 0, 0, 1],
-
                               font_style='H1'))
         g2 = MDGridLayout(cols=3, rows=3)
         self.add_button(g2)
