@@ -15,6 +15,8 @@ class MultiApp(MDApp):
     btn5 = ObjectProperty()
     btn6 = ObjectProperty()
     count_different_answers = []
+    list_answers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 25, 27, 28, 30, 32, 35, 36, 40,
+                    42, 45, 48, 49, 54, 56, 63, 64, 72, 81]
 
     def add_button(self, g2):
         self.list = [self.multiplication_answers(),
@@ -46,17 +48,15 @@ class MultiApp(MDApp):
         return g2
 
     def multiplication_answers(self):
-        list_answers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 25, 27, 28, 30, 32, 35, 36, 40,
-                        42, 45, 48, 49, 54, 56, 63, 64, 72, 81]
         rand = random.randint(0, 35)
-        if rand in self.count_different_answers:
+        while rand in self.count_different_answers:
             rand = random.randint(0, 35)
         self.count_different_answers.append(rand)
         if len(self.count_different_answers) > 6:
             self.count_different_answers.clear()
             self.count_different_answers.append(rand)
         #print(self.count_different_answers, len(self.count_different_answers), str(list_answers[rand]))
-        return str(list_answers[rand])
+        return str(self.list_answers[rand])
 
     def new_example(self, button):
         if button.text == self.right_answer:
@@ -64,19 +64,38 @@ class MultiApp(MDApp):
         else:
             self.count = self.count - 50
         button.parent.parent.children[2].text = 'Очки: ' + str(self.count)
-        cube = random.randint(0, 5)
-        if cube == 0:
-            a = random.randint(1, 9)
-            b = random.randint(1, 9)
+        choose_mult_or_division = random.randint(0, 1)
+        if choose_mult_or_division == 0:
+            # УМНОЖЕНИЕ
+            cube = random.randint(0, 5)
+            if cube == 0:
+                a = random.randint(1, 9)
+                b = random.randint(1, 9)
+            else:
+                a = random.randint(4, 9)
+                b = random.randint(4, 9)
+            self.right_answer = str(a * b)
+            for i in range(0, len(button.parent.children)):
+                button.parent.children[i].text = self.multiplication_answers()
+            button.parent.parent.children[1].text = str(a) + ' * ' + str(b) + ' = '
+            rand = random.randint(0, 5)
+            button.parent.children[rand].text = str(a * b)
+            button.parent.parent.md_bg_color = [1, 0, 1, 0]
         else:
-            a = random.randint(4, 9)
-            b = random.randint(4, 9)
-        self.right_answer = str(a * b)
-        for i in range(0, len(button.parent.children)):
-            button.parent.children[i].text = self.multiplication_answers()
-        button.parent.parent.children[1].text = str(a) + ' * ' + str(b) + ' = '
-        rand = random.randint(0, 5)
-        button.parent.children[rand].text = str(a * b)
+            # ДЕЛЕНИЕ
+            rand = random.randint(0, 35)
+            b = random.randint(1, 9)
+            self.right_answer = str((self.list_answers[rand]) / b)
+            button.parent.parent.children[1].text = str(self.list_answers[rand]) + ' / ' + str(b) + ' = '
+            l = list(range(1, 9))
+            random.shuffle(l)
+            for i in range(0, len(button.parent.children)):
+                button.parent.children[i].text = str(l[i])
+                print(l, l[0], l[1], l[2], l[3], l[4], l[5])
+            rand = random.randint(0, 5)
+            button.parent.children[rand].text = str(self.right_answer)
+            print(self.right_answer, self.list_answers[rand], b)
+            button.parent.parent.md_bg_color = [1, 1, 0, 1]
 
     def build(self):
         self.theme_cls.theme_style = "Dark"
