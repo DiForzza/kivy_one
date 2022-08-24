@@ -49,13 +49,12 @@ class MultiApp(MDApp):
 
     def multiplication_answers(self):
         rand = random.randint(0, 35)
-        while rand in self.count_different_answers:
+        while rand in self.count_different_answers or self.list_answers[rand] == self.right_answer:
             rand = random.randint(0, 35)
         self.count_different_answers.append(rand)
         if len(self.count_different_answers) > 6:
             self.count_different_answers.clear()
             self.count_different_answers.append(rand)
-        #print(self.count_different_answers, len(self.count_different_answers), str(list_answers[rand]))
         return str(self.list_answers[rand])
 
     def new_example(self, button):
@@ -83,18 +82,25 @@ class MultiApp(MDApp):
             button.parent.parent.md_bg_color = [1, 0, 1, 0]
         else:
             # ДЕЛЕНИЕ
-            rand = random.randint(0, 35)
-            b = random.randint(1, 9)
-            self.right_answer = str((self.list_answers[rand]) / b)
+            strength = random.randint(0, 5)
+            if strength == 0:
+                rand = random.randint(0, 35)
+                b = random.randint(1, 9)
+            else:
+                rand = random.randint(15, 35)
+                b = random.randint(1, 9)
+            self.right_answer = (self.list_answers[rand]) / b
+            while (self.list_answers[rand]) % b != 0 or self.list_answers[rand] == self.right_answer:
+                b = random.randint(1, 9)
+                self.right_answer = (self.list_answers[rand]) / b
             button.parent.parent.children[1].text = str(self.list_answers[rand]) + ' / ' + str(b) + ' = '
             l = list(range(1, 9))
             random.shuffle(l)
             for i in range(0, len(button.parent.children)):
                 button.parent.children[i].text = str(l[i])
-                print(l, l[0], l[1], l[2], l[3], l[4], l[5])
             rand = random.randint(0, 5)
+            self.right_answer = int(self.right_answer)
             button.parent.children[rand].text = str(self.right_answer)
-            print(self.right_answer, self.list_answers[rand], b)
             button.parent.parent.md_bg_color = [1, 1, 0, 1]
 
     def build(self):
