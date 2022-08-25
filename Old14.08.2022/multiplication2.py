@@ -49,16 +49,20 @@ class MultiApp(MDApp):
 
     def multiplication_answers(self):
         rand = random.randint(0, 35)
-        while rand in self.count_different_answers or self.list_answers[rand] == self.right_answer:
-            rand = random.randint(0, 35)
+        # while rand in self.count_different_answers:
+        #     rand = random.randint(0, 35)
+        #     print(rand, self.list_answers[rand], 'WARNING')
         self.count_different_answers.append(rand)
         if len(self.count_different_answers) > 6:
-            self.count_different_answers.clear()
-            self.count_different_answers.append(rand)
+             self.count_different_answers.clear()
+             self.count_different_answers.append(rand)
+        if str(self.list_answers[self.count_different_answers[-1]]) == str(self.right_answer):
+            print(self.count_different_answers, 'WARNING')
+        print(self.list_answers[self.count_different_answers[-1]], self.right_answer)
         return str(self.list_answers[rand])
 
     def new_example(self, button):
-        if button.text == self.right_answer:
+        if str(button.text) == str(self.right_answer):
             self.count = self.count + 1
         else:
             self.count = self.count - 50
@@ -94,10 +98,18 @@ class MultiApp(MDApp):
                 b = random.randint(1, 9)
                 self.right_answer = (self.list_answers[rand]) / b
             button.parent.parent.children[1].text = str(self.list_answers[rand]) + ' / ' + str(b) + ' = '
+            self.right_answer = int(self.right_answer)
             l = list(range(1, 9))
             random.shuffle(l)
-            self.right_answer = int(self.right_answer)
-            for i in range(0, len(button.parent.children)):
+            number = 1
+            not_in_list_number = 1
+            for i in range(0, len(l)):
+                number += 1
+                if number not in l:
+                    not_in_list_number = number
+            for i in range(0, 6):
+                if l[i] == self.right_answer:
+                    l[i] = not_in_list_number
                 button.parent.children[i].text = str(l[i])
             rand = random.randint(0, 5)
             button.parent.children[rand].text = str(self.right_answer)
