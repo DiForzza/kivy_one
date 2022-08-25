@@ -51,7 +51,6 @@ class MultiApp(MDApp):
         rand = random.randint(0, 35)
         while rand in self.count_different_answers or self.list_answers[rand] == self.right_answer:
             rand = random.randint(0, 35)
-        print(self.list_answers[rand], self.right_answer)
         self.count_different_answers.append(rand)
         if len(self.count_different_answers) > 6:
             self.count_different_answers.clear()
@@ -99,7 +98,6 @@ class MultiApp(MDApp):
             random.shuffle(l)
             self.right_answer = int(self.right_answer)
             for i in range(0, len(button.parent.children)):
-                print(str(l[i]))
                 button.parent.children[i].text = str(l[i])
             rand = random.randint(0, 5)
             button.parent.children[rand].text = str(self.right_answer)
