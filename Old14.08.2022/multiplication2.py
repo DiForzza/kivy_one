@@ -2,7 +2,7 @@ import random
 from kivymd.app import MDApp
 from kivy.properties import ObjectProperty
 from kivy.uix.button import Button
-
+from random import choice
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.label import MDLabel
 
@@ -49,16 +49,10 @@ class MultiApp(MDApp):
 
     def multiplication_answers(self):
         rand = random.randint(0, 35)
-        # while rand in self.count_different_answers:
-        #     rand = random.randint(0, 35)
-        #     print(rand, self.list_answers[rand], 'WARNING')
         self.count_different_answers.append(rand)
         if len(self.count_different_answers) > 6:
-             self.count_different_answers.clear()
-             self.count_different_answers.append(rand)
-        if str(self.list_answers[self.count_different_answers[-1]]) == str(self.right_answer):
-            print(self.count_different_answers, 'WARNING')
-        print(self.list_answers[self.count_different_answers[-1]], self.right_answer)
+            self.count_different_answers.clear()
+            self.count_different_answers.append(rand)
         return str(self.list_answers[rand])
 
     def new_example(self, button):
@@ -77,9 +71,10 @@ class MultiApp(MDApp):
             else:
                 a = random.randint(4, 9)
                 b = random.randint(4, 9)
-            self.right_answer = str(a * b)
+            self.right_answer = a * b
             for i in range(0, len(button.parent.children)):
-                button.parent.children[i].text = self.multiplication_answers()
+                if button.parent.children[i].text != str(self.right_answer):
+                    button.parent.children[i].text = self.multiplication_answers()
             button.parent.parent.children[1].text = str(a) + ' * ' + str(b) + ' = '
             rand = random.randint(0, 5)
             button.parent.children[rand].text = str(a * b)
@@ -126,7 +121,7 @@ class MultiApp(MDApp):
                               font_style='H3'))
         self.a = random.randint(1, 9)
         self.b = random.randint(1, 9)
-        self.right_answer = str(self.a * self.b)
+        self.right_answer = self.a * self.b
         g1.add_widget(MDLabel(text=str(self.a) + ' * ' + str(self.b) + ' = ',
                               halign="center",
                               theme_text_color="Custom",
