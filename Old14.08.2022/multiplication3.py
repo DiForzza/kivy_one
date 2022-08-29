@@ -1,13 +1,9 @@
 import random
-
 from kivy.uix.switch import Switch
 from kivymd.app import MDApp
-from kivy.properties import ObjectProperty
 from kivy.uix.button import Button
-from random import choice
 from kivymd.uix.gridlayout import MDGridLayout
 from kivymd.uix.label import MDLabel
-from kivymd.uix.selectioncontrol import MDSwitch
 
 
 class MultiApp(MDApp):
