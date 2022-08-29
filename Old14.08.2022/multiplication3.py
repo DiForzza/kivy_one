@@ -10,6 +10,7 @@ class MultiApp(MDApp):
     count_different_answers = []
     list_answers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 18, 20, 21, 24, 25, 27, 28, 30, 32, 35, 36, 40,
                     42, 45, 48, 49, 54, 56, 63, 64, 72, 81]
+    choose = None
 
     def add_button(self, g2):
         self.multiplication_answers()
@@ -47,28 +48,31 @@ class MultiApp(MDApp):
 
     def new_example(self, button):
         if str(button.text) == str(self.right_answer):
-            self.right_count = self.right_count + 1
-            button.parent.parent.children[2].children[1].children[1].text = 'Правильных ответов: ' + str(self.right_count)
+            if self.choose == 5:
+                pass
+            else:
+                self.right_count = self.right_count + 1
+                button.parent.parent.children[2].children[1].children[1].text = 'Правильных ответов: ' + str(self.right_count)
         else:
-            self.not_right_count = self.not_right_count + 1
-            button.parent.parent.children[2].children[1].children[0].text = 'Ошибок: ' + str(self.not_right_count)
-        #print(button.parent.parent.children[2].children[1].children[0])
-        #print(button.parent.parent.children[2].children[0].children[0].active, 'вычитание')  # вычитание
-        #print(button.parent.parent.children[2].children[0].children[2].active, 'сложение')  # сложение
-        #print(button.parent.parent.children[2].children[0].children[4].active, 'деление')  # деление
-        #print(button.parent.parent.children[2].children[0].children[6].active, 'умножение')  # умножение
-        choose_subtraction = int(button.parent.parent.children[2].children[0].children[0].active)
-        choose_addition = int(button.parent.parent.children[2].children[0].children[2].active)
-        choose_division = int(button.parent.parent.children[2].children[0].children[4].active)
-        choose_multiplication = int(button.parent.parent.children[2].children[0].children[6].active)
+            if self.choose == 5:
+                pass
+            else:
+                self.not_right_count = self.not_right_count + 1
+                button.parent.parent.children[2].children[1].children[0].text = 'Ошибок: ' + str(self.not_right_count)
         choose_random = []
-        choose_random.append(choose_multiplication)
-        choose_random.append(choose_division)
-        choose_random.append(choose_addition)
-        choose_random.append(choose_subtraction)
-        print(choose_random.count(1), choose_random)
-        choose = random.randint(0, choose_random.count(1)-1)
-        if choose == 0: #УМНОЖЕНИЕ
+        if button.parent.parent.children[2].children[0].children[6].active: # умножение
+            choose_random.append(1)
+        if button.parent.parent.children[2].children[0].children[4].active: # деление
+            choose_random.append(2)
+        if button.parent.parent.children[2].children[0].children[2].active: # сложение
+            choose_random.append(3)
+        if button.parent.parent.children[2].children[0].children[0].active: # вычитание
+            choose_random.append(4)
+        if len(choose_random) != 0:
+            self.choose = random.choice(choose_random)
+        else:
+            self.choose = 5
+        if self.choose == 1: #УМНОЖЕНИЕ
             cube = random.randint(0, 5)
             if cube == 0:
                 a = random.randint(1, 9)
@@ -84,7 +88,7 @@ class MultiApp(MDApp):
             #rand = random.randint(0, 5)
             #button.parent.children[rand].text = str(a * b)
             button.parent.parent.md_bg_color = [0, 0.65, 1, 1]
-        elif choose == 1: #ДЕЛЕНИЕ
+        elif self.choose == 2: #ДЕЛЕНИЕ
             strength = random.randint(0, 5)
             if strength == 0:
                 rand = random.randint(0, 35)
@@ -115,6 +119,36 @@ class MultiApp(MDApp):
             button.parent.parent.md_bg_color = [0, 0.9, 1, 1]
             #button.parent.parent.children[1].text_color = [1, 1, 0.5, 1]
             #print(button.parent.parent.children[1].text_color)
+        elif self.choose == 3: #СЛОЖЕНИЕ
+            a = random.randint(0, 49)
+            b = random.randint(0, 49)
+            self.right_answer = a + b
+            self.list = [str(self.right_answer),
+                         str(random.randint(0, 49) + random.randint(0, 49)),
+                         str(random.randint(0, 49) + random.randint(0, 49)),
+                         str(random.randint(0, 49) + random.randint(0, 49)),
+                         str(random.randint(0, 49) + random.randint(0, 49)),
+                         str(random.randint(0, 49) + random.randint(0, 49))]
+            random.shuffle(self.list)
+            for i in range(0, len(button.parent.children)):
+                button.parent.children[i].text = self.list[i]
+            button.parent.parent.children[1].text = str(a) + ' + ' + str(b) + ' = '
+        elif self.choose == 4: #ВЫЧИТАНИЕ
+            a = random.randint(0, 49)
+            b = random.randint(0, 49)
+            self.right_answer = a - b
+            self.list = [str(self.right_answer),
+                         str(random.randint(-49, 49) + random.randint(-49, 49)),
+                         str(random.randint(-49, 49) + random.randint(-49, 49)),
+                         str(random.randint(-49, 49) + random.randint(-49, 49)),
+                         str(random.randint(-49, 49) + random.randint(-49, 49)),
+                         str(random.randint(-49, 49) + random.randint(-49, 49))]
+            random.shuffle(self.list)
+            for i in range(0, len(button.parent.children)):
+                button.parent.children[i].text = self.list[i]
+            button.parent.parent.children[1].text = str(a) + ' - ' + str(b) + ' = '
+        elif self.choose == 5:
+            button.parent.parent.children[1].text = str('НИЧЕГО НЕ ВЫБРАНО')
 
     def build(self):
         #self.theme_cls.theme_style = "Dark"
