@@ -47,7 +47,7 @@ class MultiApp(MDApp):
                      str(random_choice[5])]
         #self.list[0] = str(self.right_answer)
         random.shuffle(self.list)
-        print(self.list)
+
 
     def new_example(self, button):
         if str(button.text) == str(self.right_answer):
@@ -57,7 +57,10 @@ class MultiApp(MDApp):
             self.not_right_count = self.not_right_count + 1
             button.parent.parent.children[2].children[1].children[0].text = 'Ошибок: ' + str(self.not_right_count)
         #print(button.parent.parent.children[2].children[1].children[0])
-
+        print(button.parent.parent.children[2].children[0].children[0].active, 'вычитание')  # вычитание
+        print(button.parent.parent.children[2].children[0].children[2].active, 'сложение')  # сложение
+        print(button.parent.parent.children[2].children[0].children[4].active, 'деление')  # деление
+        print(button.parent.parent.children[2].children[0].children[6].active, 'умножение')  # умножение
         choose_mult_or_division = random.randint(0, 1)
         if choose_mult_or_division == 0:
             # УМНОЖЕНИЕ
