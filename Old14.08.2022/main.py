@@ -1,4 +1,6 @@
 from kivy.app import App
+from kivy.graphics import Line
+from kivy.metrics import dp
 from kivy.properties import StringProperty, BooleanProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -78,6 +80,28 @@ class MainWidget(Widget):
 class TheLabApp(App):
     pass
 
+class CanvasExample1(Widget):
+    pass
+
+class CanvasExample2(Widget):
+    pass
+
+class CanvasExample3(Widget):
+    pass
+
+class CanvasExample4(Widget):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        with self.canvas:
+            self.line = Line(points=(100, 100, 300, 400))
+            Line(circle=(400, 100, 300), width=2)
+
+    def on_button_a_click(self):
+        x1, y1, x2, y2 = self.line.points
+        x2 += dp(50)
+        if x2 > self.width:
+            x2 = 0
+        self.line.points = (300, 100, x2, 400)
 
 if __name__ == "__main__":
     app = TheLabApp()
