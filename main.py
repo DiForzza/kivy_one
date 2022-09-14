@@ -1,6 +1,7 @@
 from kivy.config import Config
 Config.set('graphics', 'width', '1400')
 Config.set('graphics', 'height', '800')
+import random
 from kivy import platform
 from kivy.core.window import Window
 from kivy.app import App
@@ -74,7 +75,8 @@ class MainWidget(Widget):
         print('foo1')
 
         for i in range(len(self.tiles_coordinates), self.NB_TILES):
-            self.tiles_coordinates.append((0, last_y))
+            r = random.randint(-1, 1)
+            self.tiles_coordinates.append((r, last_y))
             last_y += 1
 
         print('foo2')
